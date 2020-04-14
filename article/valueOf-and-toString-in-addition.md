@@ -34,6 +34,9 @@ alert(1 + obj1); // 打印valueOf，执行结果为13
 上述代码的执行结果为什么会各不相同，到底什么时候该调用 `valueOf` ？ `toString` 呢？二者的 **优先级** 呢？为什么还有 **两个都调用** 的情况？对象的 `valueOf` 以及 `toString` 方法的触发机制比较复杂，结合网上[相关回答文章](https://stackoverflow.com/questions/2485632/valueof-vs-tostring-in-javascript)以及[ECMA规范](http://www.ecma-international.org/ecma-262/5.1/)后，大概尝试解答一下疑惑。在这之前，我们需要先了解几个概念
 
 
+## primitive values
+在JS中，除 `Object` 以外的 **原始(基本)类型** 的值本身是无法被改变的。以字符串为例，对字符串的操作返回的一定是新的字符串，而不是对原字符串进行修改，原字符串本身是没有被改变的。像这样的类型对应的值，我们称之为 **primitive values** ，也就是原始值。
+
 ## `ToPrimitive` 
 [抽象方法](http://www.ecma-international.org/ecma-262/5.1/#sec-9.1)，接受 `input` 参数和可选的 `PreferredType` 参数，会将 `input` 参数转换为**非对象类型**(none-Object type)。根据可选参数（文档里叫 _hint_ ，中文翻译是**暗示**，我这里为了方便理解就写成了参数） `PreferredType` 来决定将 `input` 转换成哪种类型：
 
